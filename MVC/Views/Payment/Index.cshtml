@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Payment";
+    Layout = "_Layout";
+}
+
+<div class="container mt-4">
+    <h2>Initiate Payment</h2>
+    <form asp-action="GoToPayment" method="post">
+        <button type="submit" class="btn btn-primary">Pay Now</button>
+    </form>
+</div>

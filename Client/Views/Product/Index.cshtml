@@ -1,0 +1,30 @@
+﻿@model IEnumerable<DataAccess.DTOs.Product.GETProduct>
+
+@{
+    ViewData["Title"] = "Products";
+    Layout = "_Layout";
+}
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-action="Register" asp-controller="Account">Register</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-dark" href="https://localhost:7121/account/login">Login</a>
+</li>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("Details", "Product", new { id = item.Id })" class="text-decoration-none text-dark">
+                <div class="card h-100">
+                    <img class="card-img-top" src="@item.ImageURL" alt="@item.Name" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description</p>
+                        <p class="card-text"><strong>@item.Price.ToString("C")</strong></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>

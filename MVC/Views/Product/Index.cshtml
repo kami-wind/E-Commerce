@@ -1,0 +1,43 @@
+﻿@model IEnumerable<DataAccess.DTOs.Product.GETProduct>
+
+@{
+    ViewData["Title"] = "Products";
+    Layout = "_Layout";
+}
+
+<div class="container mt-4">
+    @if (User.Identity.IsAuthenticated && User.Identity.Name == "admin@gmail.com")
+    {
+        <div class="mt-4 mb-4">
+            <a asp-action="Create" class="btn btn-primary">Create New Product</a>
+        </div>
+    }
+
+
+    <form asp-action="Index" method="get">
+        <div class="input-group mb-4">
+            <input type="text" name="searchString" class="form-control" placeholder="Search products..." value="@ViewData["CurrentFilter"]" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <a href="@Url.Action("Details", "Product", new { id = item.Id })" class="text-decoration-none text-dark">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="@item.ImageURL" alt="@item.Name" />
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">@item.Description</p>
+                            <p class="card-text"><strong>@item.Price.ToString("C")</strong></p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
